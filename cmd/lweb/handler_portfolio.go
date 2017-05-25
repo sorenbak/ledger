@@ -1,12 +1,42 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"sort"
+	"time"
 
 	"github.com/doneland/yquotes"
 	"github.com/howeyc/ledger"
+	"github.com/howeyc/ledger/cmd/lweb/internal/ghist"
+	"github.com/lucasb-eyer/go-colorful"
 )
+
+type portfolioValue struct {
+	Date          time.Time
+	SectionValues map[string]float64
+}
+
+func getPortfolioHistoryData() ([]portfolioValue, error) {
+	pvs := make([]portfolioValue, 30)
+	for _, stock := range stockConfigData.Stocks {
+		prices, herr := ghist.Get(stock.Ticker)
+		if herr != nil {
+			continue
+			fmt.Println(stock.Ticker, herr)
+		}
+		for i, price := range prices[:30] {
+			pvs[i].Date = price.Date
+			if pvs[i].SectionValues == nil {
+				pvs[i].SectionValues = make(map[string]float64)
+			}
+			val := pvs[i].SectionValues[stock.Section]
+			val += stock.Shares * price.Close
+			pvs[i].SectionValues[stock.Section] = val
+		}
+	}
+	return pvs, nil
+}
 
 func portfolioHandler(w http.ResponseWriter, r *http.Request) {
 	t, err := parseAssets("templates/template.portfolio.html", "templates/template.nav.html")
@@ -22,7 +52,17 @@ func portfolioHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	balances := ledger.GetBalances(trans, []string{})
 
-	var pData pageData
+	type lineData struct {
+		SectionName string
+		RGBColor    string
+		Values      []float64
+	}
+	type portPageData struct {
+		pageData
+		Labels   []string
+		DataSets []lineData
+	}
+	var pData portPageData
 	pData.Reports = reportConfigData.Reports
 	pData.Transactions = trans
 
@@ -98,6 +138,40 @@ func portfolioHandler(w http.ResponseWriter, r *http.Request) {
 	sort.SliceStable(pData.Stocks, func(i, j int) bool {
 		return pData.Stocks[i].Section < pData.Stocks[j].Section
 	})
+
+	colorPalette := colorful.FastHappyPalette(len(sectionTotals) + 1)
+	var colorIdx int
+	for secName := range sectionTotals {
+		r, g, b := colorPalette[colorIdx].RGB255()
+		pData.DataSets = append(pData.DataSets,
+			lineData{SectionName: secName,
+				RGBColor: fmt.Sprintf("%d, %d, %d", r, g, b)})
+		colorIdx++
+	}
+	rc, gc, bc := colorPalette[colorIdx].RGB255()
+	pData.DataSets = append(pData.DataSets,
+		lineData{SectionName: "Total",
+			RGBColor: fmt.Sprintf("%d, %d, %d", rc, gc, bc)})
+
+	pvs, perr := getPortfolioHistoryData()
+	if perr != nil {
+		http.Error(w, perr.Error(), 500)
+		return
+	}
+
+	for _, pv := range pvs {
+		pData.Labels = append(pData.Labels, pv.Date.Format("2006-01-02"))
+		for dIdx := range pData.DataSets {
+			val := pv.SectionValues[pData.DataSets[dIdx].SectionName]
+			if pData.DataSets[dIdx].SectionName == "Total" {
+				for _, v := range pv.SectionValues {
+					val += v
+				}
+			}
+			pData.DataSets[dIdx].Values = append(pData.DataSets[dIdx].Values, val)
+		}
+
+	}
 
 	err = t.Execute(w, pData)
 	if err != nil {

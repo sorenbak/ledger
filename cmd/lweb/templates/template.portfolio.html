@@ -55,6 +55,20 @@
 		</div>
       </div>
       <div class="page-content inset">
+
+      <div class="row">
+      <div class="col-xs-12">
+          <div id="canvas-holder" style="width:100%">
+               <canvas id="chart-area" width="300" height="300" />
+          </div>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-xs-12">
+          <div id="chart-legend"></div>
+      </div>
+      </div>
+
       <div class="row">
       <div class="col-md-12">
 	
@@ -96,10 +110,42 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/jquery.min.js"></script>
+    <script src="/Chart.min.js"></script>
+    <script src="/Chart.StackedBar.js"></script>
+    <script src="/legend.js"></script>
     <script src="/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
     <script>
     var overallOn = true;
     $(document).ready(function() {
+	  var ctx = document.getElementById("chart-area").getContext("2d");
+    var data = {
+        labels: [
+        {{range .Labels}}
+          "{{.}}",
+        {{end}}
+        ],
+         datasets: [
+    {{range .DataSets}}
+    {
+        label: {{.SectionName}},
+        fillColor: "rgba({{.RGBColor}},0.2)",
+        strokeColor: "rgba({{.RGBColor}},1)",
+        pointColor: "rgba({{.RGBColor}},1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba({{.RGBColor}},1)",
+        data: [
+        {{range .Values}}
+        {{.}},
+        {{end}}
+        ]
+    },
+    {{end}}
+        ]
+    };
+    var myPieChart = new Chart(ctx).Line(data,{responsive: true});
+    legend(document.getElementById('chart-legend'), data);
+ 
     $('.popover-dismiss').popover({
           trigger: 'focus',
           animation: false
