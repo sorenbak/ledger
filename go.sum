@@ -4,10 +4,8 @@ github.com/codegangsta/inject v0.0.0-20140425184007-37d7f8432a3e h1:ASNbuqbRsgQC
 github.com/codegangsta/inject v0.0.0-20140425184007-37d7f8432a3e/go.mod h1:4Zcjuz89kmFXt9morQgcfYZAYZ5n8WHjt81YYWIwtTM=
 github.com/go-martini/martini v0.0.0-20140519164645-49411a5b6468 h1:Se/FfS0xjB5rsDhsKfZf0R75vf7hRUHlJwAh0h63Kvw=
 github.com/go-martini/martini v0.0.0-20140519164645-49411a5b6468/go.mod h1:/P9AEU963A2AYjv4d1V5eVL1CQbEJq6aCNHDDjibzu8=
-github.com/howeyc/ledger v0.2.2 h1:KMt23tYKf7COcDJ2qyaU53Yn90sZRNpDT1dc4B+/iA0=
-github.com/howeyc/ledger v0.2.2/go.mod h1:oRHvp6DZRasXYRTqFe04I9r5vIq5K/G9pKF0j/dz+KM=
-github.com/jbrukh/bayesian v0.0.0-20111202215358-2177c82d4d5a h1:aHHLp1qEqAwv1UpZkhMH17QOjuDN8eFVqtl4riqWAyo=
-github.com/jbrukh/bayesian v0.0.0-20111202215358-2177c82d4d5a/go.mod h1:SELxwZQq/mPnfPCR2mchLmT4TQaPJvYtLcCtDWSM7vM=
+github.com/jbrukh/bayesian v0.0.0-20190218043818-13a316171413 h1:z0RHcVb2JG8vwYcBAFQ0NxGikvLlaIcnViiqDRv/Fks=
+github.com/jbrukh/bayesian v0.0.0-20190218043818-13a316171413/go.mod h1:SELxwZQq/mPnfPCR2mchLmT4TQaPJvYtLcCtDWSM7vM=
 github.com/joyt/godate v0.0.0-20150226210126-7151572574a7 h1:2wH5antjhmU3EuWyidm0lJ4B9hGMpl5lNRo+M9uGJ5A=
 github.com/joyt/godate v0.0.0-20150226210126-7151572574a7/go.mod h1:R+UgFL3iylLhx9N4w35zZ2HdhDlgorRDx4SxbchWuN0=
 github.com/juztin/numeronym v0.0.0-20160223091026-859fcc2918e2 h1:jrs0oyU9XY7MlTHbNxecqFgY+fgEENZdP4Z8FZln/pw=
@@ -20,3 +18,5 @@ github.com/martini-contrib/gzip v0.0.0-20151124214156-6c035326b43f h1:wVDxEVZP1e
 github.com/martini-contrib/gzip v0.0.0-20151124214156-6c035326b43f/go.mod h1:jhUB0rZB2TPWqy0yGugKRRictO591eSO7If7O4MfCaA=
 github.com/martini-contrib/staticbin v0.0.0-20140517153916-b9631fb8c188 h1:bd9DC6qyTmEthsNQO4d/ffPjO8qAdjnyS+ASuSYvc+c=
 github.com/martini-contrib/staticbin v0.0.0-20140517153916-b9631fb8c188/go.mod h1:X45OGV5BBzLUtQO89hy0XhCUif/vO0ihMuyaBZBcivo=
+gopkg.in/DATA-DOG/go-sqlmock.v1 v1.3.0 h1:FVCohIoYO7IJoDDVpV2pdq7SgrMH6wHnuTyrdrxJNoY=
+gopkg.in/DATA-DOG/go-sqlmock.v1 v1.3.0/go.mod h1:OdE7CF6DbADk7lN8LIKRzRJTTZXIjtWgA5THM5lhBAw=

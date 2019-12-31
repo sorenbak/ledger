@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/go-martini/martini"
-	"github.com/howeyc/ledger"
 	colorful "github.com/lucasb-eyer/go-colorful"
+	"github.com/sorenbak/ledger"
 )
 
 func getRangeAndPeriod(dateRange, dateFreq string) (start, end time.Time, period ledger.Period) {

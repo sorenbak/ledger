@@ -8,7 +8,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/howeyc/ledger"
+	"github.com/sorenbak/ledger"
 )
 
 // PrintStats prints out statistics of the ledger

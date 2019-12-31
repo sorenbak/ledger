@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/howeyc/ledger"
+	"github.com/sorenbak/ledger"
 )
 
 func usage(name string) {

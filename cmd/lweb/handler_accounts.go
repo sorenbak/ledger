@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/howeyc/ledger"
+	"github.com/sorenbak/ledger"
 
 	"github.com/BurntSushi/toml"
 	"github.com/go-martini/martini"

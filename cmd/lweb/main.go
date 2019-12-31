@@ -5,13 +5,13 @@ import (
 	"crypto/sha256"
 	"flag"
 	"fmt"
-	"log"
 	"io"
+	"log"
 	"net/http"
 	"sync"
 	"time"
 
-	"github.com/howeyc/ledger"
+	"github.com/sorenbak/ledger"
 
 	"github.com/BurntSushi/toml"
 	"github.com/go-martini/martini"
