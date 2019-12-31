@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/howeyc/ledger"
+	"github.com/sorenbak/ledger"
 )
 
 // PrintTransaction prints a transaction formatted to fit in specified column width.

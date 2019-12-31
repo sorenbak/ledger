@@ -10,9 +10,8 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/howeyc/ledger"
-
 	"github.com/jbrukh/bayesian"
+	"github.com/sorenbak/ledger"
 )
 
 const (
